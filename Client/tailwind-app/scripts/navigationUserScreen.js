@@ -151,6 +151,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("popupmenu").classList.toggle("hidden");
       });
 
+    const userNameHam = document.getElementById("userNameHam");
+    userNameHam.textContent = localStorage.getItem("userName");
+
+    const userEmailHam = document.getElementById("userEmailHam");
+    userEmailHam.textContent = localStorage.getItem("userEmail");
+
     /*
 this file handles the logic behind setting a dark mode/light mode on the website.
 

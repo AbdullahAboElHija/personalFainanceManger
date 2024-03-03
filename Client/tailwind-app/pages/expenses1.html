@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../style.css">
     <title>Document</title>
     <script src="../scripts/navigationUserScreen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/expanses.js"></script>
 </head>
 
 <body class="dark:bg-gray-700">
@@ -35,7 +37,7 @@
                   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                   
                   <!-- Chart doughnut -->
-                  <script>
+                  <!-- <script>
                     const dataDoughnut = {
                       labels: ["Shopping", "Food & Dining", "Transportation","Loan"],
                       datasets: [
@@ -77,16 +79,40 @@
                       document.getElementById("chartDoughnut"),
                       configDoughnut
                     );
-                  </script>
+                  </script> -->
                 </div>
             <div class="flex flex-col justify-center items-center mx-4">
                 <!-- Transcation activity-->
                 <div class="container flex flex-col p-2 my-2 mx-auto shadow-lg rounded-lg overflow-hidden dark:bg-gray-900 dark:border-solid dark:border-white max-w-[1200px] bg-gray-200"> 
+                  <a  class="py-3 px-5 bg-gray-100 text-center text-xl font-bold dark:text-white dark:bg-gray-700">Latest Expenses</a>
+                  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 ">
+                      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 ">
+                          <div class="overflow-hidden ">
+                              <table id="latestExpensesTable" class="min-w-full text-left text-sm font-light dark:text-gray-400">
+                                  <thead class="border-b bg-white font-medium dark:bg-gray-700 dark:text-gray-400">
+                                      <tr>
+                                          <th scope="col" class="px-6 py-4">Date</th>
+                                          <th scope="col" class="px-6 py-4">Payee</th>
+                                          <th scope="col" class="px-6 py-4">Category</th>
+                                          <th scope="col" class="px-6 py-4">Amount</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="latestExpensesBody">
+                                      <!-- Expense rows will be dynamically added here -->
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+
+                <!-- <div class="container flex flex-col p-2 my-2 mx-auto shadow-lg rounded-lg overflow-hidden dark:bg-gray-900 dark:border-solid dark:border-white max-w-[1200px] bg-gray-200"> 
                     <a  class="py-3 px-5 bg-gray-100 text-center text-xl font-bold dark:text-white dark:bg-gray-700">Latest Expenses</a>
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 ">
                           <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 ">
                             <div class="overflow-hidden ">
-                              <table class="min-w-full text-left text-sm font-light dark:text-gray-400">
+                              <table id="latestExpensesTable" class="min-w-full text-left text-sm font-light dark:text-gray-400">
                                 <thead
                                   class="border-b bg-white font-medium dark:bg-gray-700 dark:text-gray-400">
                                   <tr>
@@ -124,7 +150,7 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                 
                 <!--End of Latest transactions-->
                 <!--Upcoming expenses -->
@@ -133,7 +159,7 @@
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                           <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                             <div class="overflow-hidden">
-                              <table class="min-w-full text-left text-sm font-light dark:text-gray-400">
+                              <table  class="min-w-full text-left text-sm font-light dark:text-gray-400">
                                 <thead
                                   class="border-b bg-white font-medium dark:bg-gray-700 dark:text-gray-400">
                                   <tr>
@@ -355,7 +381,7 @@
           </footer> 
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
+        <!-- <script>
           const ctx = document.getElementById("myChart").getContext("2d");
           const myChart = new Chart(ctx, {
             type: "bar",
@@ -411,7 +437,7 @@
               },
             },
           });
-        </script>
+        </script> -->
       
 
 </body>

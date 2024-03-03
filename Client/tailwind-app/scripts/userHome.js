@@ -12,18 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // Handle successful response
         console.log("Response received:", response.data);
 
-
-        
         const userData = response.data;
         const userName = userData.name;
         const userEmail = response.data.email;
-    
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userEmail", userEmail);
+        // Save username and name in local storage
+
         // Update the username
-        const userNameHam = document.getElementById('userNameHam');
+        const userNameHam = document.getElementById("userNameHam");
         userNameHam.textContent = userName;
-    
+
         // Update the user email
-        const userEmailHam = document.getElementById('userEmailHam');
+        const userEmailHam = document.getElementById("userEmailHam");
         userEmailHam.textContent = userEmail;
         // Update the welcome message
         const welcomeMsgUser = document.getElementById("welcomeMsgUser");
@@ -128,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Add table data for each column
           expenseRow.innerHTML = `
                         <td class="whitespace-nowrap px-6 py-4 font-medium">${expense.startDate}</td>
-                        <td class="whitespace-nowrap px-6 py-4 dark:text-white">Wallmart</td>
+                        <td class="whitespace-nowrap px-6 py-4 dark:text-white">${expense.payee}</td>
                         <td class="whitespace-nowrap px-6 py-4 dark:text-white">${expense.category}</td>
                         <td class="whitespace-nowrap px-6 py-4 dark:text-white">$${expense.amount}</td>
                     `;
@@ -171,23 +172,25 @@ document.addEventListener("DOMContentLoaded", function () {
         //   }
         // });
         expensesData.forEach((expense) => {
-            const category = expense.category;
-            const amount = parseFloat(expense.amount);
-        
-            // Get the month from the expense's date
-            const expenseDate = new Date(expense.startDate);
-            const expenseMonth = expenseDate.getMonth();
-        
-            // Get the current month
-            const currentDate = new Date();
-            const currentMonth = currentDate.getMonth();
-        
-            // Check if the expense's month matches the current month
-            if (expenseMonth === currentMonth && categoriesToShow.includes(category)) {
-                expensesByCategory[category] += amount;
-            }
+          const category = expense.category;
+          const amount = parseFloat(expense.amount);
+
+          // Get the month from the expense's date
+          const expenseDate = new Date(expense.startDate);
+          const expenseMonth = expenseDate.getMonth();
+
+          // Get the current month
+          const currentDate = new Date();
+          const currentMonth = currentDate.getMonth();
+
+          // Check if the expense's month matches the current month
+          if (
+            expenseMonth === currentMonth &&
+            categoriesToShow.includes(category)
+          ) {
+            expensesByCategory[category] += amount;
+          }
         });
-        
 
         const dataDoughnut = {
           labels: categoriesToShow,
