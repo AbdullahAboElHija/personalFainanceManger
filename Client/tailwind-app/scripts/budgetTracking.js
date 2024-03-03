@@ -1,15 +1,127 @@
-// Function to display expenses breakdown
-function displayExpenses(expenses) {
-  const expensesList = document.getElementById("expensesList");
-  expensesList.innerHTML = ""; // Clear previous expenses
+let currentlySelectedMonth = null;
+let currentlySelectedYear = "2024";
 
-  Object.keys(expenses).forEach((category) => {
-    const expenseItem = document.createElement("li");
-    expenseItem.textContent = `${category}: $${expenses[category]}`;
-    expensesList.appendChild(expenseItem);
+let budgetsArray = [];
+
+function calculateSpentPercentages(budgetsArray, expensesArray, month, year) {
+  // Format the month and year to match the budgetDate format ("YY-MM")
+  const formattedMonth = month.padStart(2, "0"); // Ensure month is two digits
+  const monthYear = year + "-" + formattedMonth; // Format to "YY-MM"
+  const relevantBudgets = budgetsArray.filter(
+    (budget) => budget.budgetDate === monthYear
+  );
+  const expensesSumByCategory = expensesArray.reduce((acc, expense) => {
+    acc[expense.category.toLowerCase()] =
+      (acc[expense.category.toLowerCase()] || 0) + expense.amount;
+    return acc;
+  }, {});
+
+  return relevantBudgets.map((budget) => {
+    const spent = expensesSumByCategory[budget.category.toLowerCase()] || 0;
+    const spentPercentage = (spent / budget.limit) * 100;
+    return {
+      ...budget,
+      spent,
+      spentPercentage: spentPercentage.toFixed(2) + "%", // Format percentage with 2 decimal places
+    };
   });
 }
 
+function getToken() {
+  const tokenObj = JSON.parse(localStorage.getItem("token"));
+  if (!tokenObj) return null;
+
+  const currentTime = new Date().getTime();
+  if (currentTime > tokenObj.expires) {
+    localStorage.removeItem("token"); // Remove expired token
+    return null;
+  }
+
+  return tokenObj.value; // Return the token if it hasn't expired
+}
+
+token = getToken();
+
+axios
+  .get("https://partialbackendforweb.onrender.com/pages/api/budget", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    budgetsArray = response.data;
+  })
+  .catch((error) => {
+    console.error("Error retrieving budget data:", error);
+  });
+
+async function getExpensesBasedOnMonthAndYear() {
+  try {
+    const response = await axios.get(
+      "https://partialbackendforweb.onrender.com/pages/api/expenses/retrieve",
+      {
+        params: {
+          month: currentlySelectedMonth,
+          year: currentlySelectedYear,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // Once the data is fetched, return the expenses array
+    return response.data.expenses; // This waits for the axios request to complete
+  } catch (error) {
+    console.error("Error retrieving data:", error);
+    return []; // Return an empty array in case of an error
+  }
+}
+
+// Function to display expenses breakdown
+async function displayBudgets(budgetsArray) {
+  if (!currentlySelectedMonth || !currentlySelectedYear) {
+    return;
+  }
+
+  const expenseArray = await getExpensesBasedOnMonthAndYear();
+
+  budgetsArray = calculateSpentPercentages(
+    budgetsArray,
+    expenseArray,
+    currentlySelectedMonth,
+    currentlySelectedYear
+  );
+
+  const budgetsList = document.getElementById("budgetList");
+  budgetsList.innerHTML = ""; // Clear previous budgets
+  budgetsArray.forEach((budget) => {
+    const li = document.createElement("li");
+    const percentageSpent = (budget.spent / budget.limit) * 100;
+    li.innerHTML = `
+      <div class="flex gap-5 p-2 my-2">
+        <div>
+          <img src="../Images/avatar-anisha.png" class="rounded-full w-10 h-10 mb-2 ml-2" />
+        </div>
+        <div class="flex flex-col gap-1 w-96">
+          <div class="flex justify-between gap-2">
+            <h5 class="dark:text-white">${budget.category}</h5>
+            <p class="dark:text-white">$${budget.limit}</p>
+          </div>
+          <div class="w-full h-4 mb-4 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div class="bg-green-600 text-xs h-4 rounded-full text-center p-0.5 leading-none dark:bg-green-500 dark:text-white" style="width: ${percentageSpent}%">
+              $${budget.spent}
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <a href="budgetCategoryChanger.html" class="text-blue-500">Edit Budget</a>
+        </div>
+      </div>
+    `;
+
+    budgetsList.appendChild(li);
+  });
+}
 
 // Get the select element by its ID
 const selectYear = document.getElementById("year");
@@ -18,40 +130,42 @@ const selectYear = document.getElementById("year");
 const currentYear = new Date().getFullYear();
 
 // Generate options for years from 1970 to current year
-for (let year = 1970; year <= currentYear; year++) {
-    // Create an option element
-    const option = document.createElement("option");
-    
-    // Set the value and text content of the option
-    option.value = year;
-    option.textContent = year;
-    
-    // Append the option to the select element
-    selectYear.appendChild(option);
+for (let year = currentYear; year >= 1970; year--) {
+  // Create an option element
+  const option = document.createElement("option");
+
+  // Set the value and text content of the option
+  option.value = year;
+  option.textContent = year;
+
+  // Append the option to the select element
+  selectYear.appendChild(option);
 }
 
+selectYear.value = "2024";
+
 //----------------------------------------------------------------------
-let selectedYear = null; // Variable to store the selected year
+// let selectedYear = null; // Variable to store the selected year
 
 // Function to handle year selection
 function selectingYear(year) {
-  selectedYear = year; // Store the selected year
-  console.log("Selected Year:", selectedYear); // Log the selected year to the console
+  selectYear.value = year; // Store the selected year
+  currentlySelectedYear = year.toString();
 }
 
 // Function to handle month selection
 function selectMonth(month) {
-  if (selectedYear) {
+  if (currentlySelectedYear) {
     // Log the selected year and month to the console
-    console.log("Selected Year:", selectedYear);
+    console.log("Selected Year:", currentlySelectedYear);
     console.log("Selected Month:", month);
+    currentlySelectedMonth = month.toString();
+    displayBudgets(budgetsArray);
   } else {
     // Prompt the user to select a year first
     console.log("Please select a year first");
   }
 }
-
-
 
 //----------------------------------------------------------------------
 

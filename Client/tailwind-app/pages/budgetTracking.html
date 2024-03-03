@@ -17,7 +17,7 @@
      
     <div id="navbar-container" ></div>
     <h2 class="my-8 text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white text-center">Budget Tracking </h2> 
-    
+    <h4 class="ml-2 text-blue-400 dark:text-blue-800">Hint:Select March</h4>
       <!-- Year Picker -->
       <div class=" flex items-center justify-center">
         <label for="year" class="dark:text-white">Year:</label>
@@ -140,7 +140,7 @@
       <div
         class="dark:bg-gray-900 container max-w-xl shadow-xl border border-solid"
       >
-        <ul class="max-w-xl divide-gray-200 dark:divide-gray-900">
+        <ul id="budgetList" class="budgets-list max-w-xl divide-gray-200 dark:divide-gray-900">
           <li class="py-3 sm:py-2 shadow">
             <div class="flex gap-5 p-2 my-2">
               <div>
@@ -417,5 +417,6 @@
           </div>
         </div>
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </footer>  </body>
 </html>
