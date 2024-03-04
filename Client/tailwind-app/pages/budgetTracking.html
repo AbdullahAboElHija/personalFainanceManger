@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style.css" />
-    <script src="../scripts/budgetTracking.js" defer></script>
-    <script src="../scripts/navigationUserScreen.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="../scripts/budgetTracking.js" defer></script>
+    <script type="module" src="../scripts/navigationUserScreen.js" defer></script>
 
     <title>Budget Tracking</title>
   </head>
@@ -21,10 +22,14 @@
       <!-- Year Picker -->
       <div class=" flex items-center justify-center">
         <label for="year" class="dark:text-white">Year:</label>
-        <select
+        <!-- <select
           id="year"
           class="dark:bg-gray-900 dark:text-white p-2 ml-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           onchange="selectingYear(this.value)"
+        > -->
+        <select
+          id="year"
+          class="dark:bg-gray-900 dark:text-white p-2 ml-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         >
           <option value="">Select Year</option>
           <!-- Generate options for years -->
@@ -37,8 +42,8 @@
         <select
           id="month"
           class="p-2 ml-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          onchange="selectMonth(this.value)"
-        >
+          onchange="selectMonth(this.value)">
+
           <option value="">Select Month</option>
           <option value="1">January</option>
           <option value="2">February</option>
@@ -56,81 +61,22 @@
       </div>
 
       <!-- Month Selector - Desktop -->
-      <div class="hidden sm:flex flex-wrap justify-center gap-1 my-8">
-        <!-- Month Options -->
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(1)"
-        >
-          January
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(2)"
-        >
-          February
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(3)"
-        >
-          March
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(4)"
-        >
-          April
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(5)"
-        >
-          May
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(6)"
-        >
-          June
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(7)"
-        >
-          July
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(8)"
-        >
-          August
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(9)"
-        >
-          September
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(10)"
-        >
-          October
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(11)"
-        >
-          November
-        </div>
-        <div
-          class="dark:bg-gray-900 dark:text-white p-4 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300"
-          onclick="selectMonth(12)"
-        >
-          December
-        </div>
-      </div>
+       <!-- Month Selector - Desktop -->
+    <div class="hidden sm:flex flex-wrap justify-center gap-1 my-8">
+      <!-- Month Options -->
+      <div id="janBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">January</div>
+      <div id="febBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">February</div>
+      <div id="marBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">March</div>
+      <div id="aprBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">April</div>
+      <div id="mayBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">May</div>
+      <div id="junBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">June</div>
+      <div id="julBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">July</div>
+      <div id="augBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">August</div>
+      <div id="sepBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">September</div>
+      <div id="octBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">October</div>
+      <div id="novBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">November</div>
+      <div id="decBtn" class="dark:bg-gray-900 dark:text-white p-4 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">December</div>
+  </div>
    
 
     <div
@@ -417,6 +363,6 @@
           </div>
         </div>
       </div>
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </footer>  </body>
 </html>
