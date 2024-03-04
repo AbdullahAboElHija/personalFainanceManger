@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../scripts/server.js"></script>
+    <script type="module" src="../scripts/server.js"></script>
     <title>Login - Budget Buddy</title>
   </head>
   <body
@@ -56,9 +56,13 @@
             <a href="#" class="text-blue-500 hover:underline"
               >Forgot Password?</a
             >
-            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick="login()">
+            <button
+              type="button"
+              id="loginBtn"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            >
               Login
-            </button>     
+            </button>
           </div>
         </form>
         <div class="py-3">
@@ -85,15 +89,14 @@
         <!-- Create Account Link -->
         <p class="text-sm mt-4">
           Don't have an account?
-          <a href="register.html" class="text-blue-500 hover:underline">Create one</a>
-          
+          <a href="register.html" class="text-blue-500 hover:underline"
+            >Create one</a
+          >
         </p>
         <a href="index.html" class="text-blue-500 hover:underline"
-        >Back to Home Screen</a
-      >
+          >Back to Home Screen</a
+        >
       </div>
     </div>
-
-    
   </body>
 </html>
