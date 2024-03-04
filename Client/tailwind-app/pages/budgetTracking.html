@@ -18,7 +18,7 @@
      
     <div id="navbar-container" ></div>
     <h2 class="my-8 text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white text-center">Budget Tracking </h2> 
-    <h4 class="ml-2 text-blue-400 dark:text-blue-800">Hint:Select March</h4>
+    <h4 class="ml-4 text-blue-500 dark:text-blue-800">Hint:Select = March 2024</h4>
       <!-- Year Picker -->
       <div class=" flex items-center justify-center">
         <label for="year" class="dark:text-white">Year:</label>
@@ -42,7 +42,7 @@
         <select
           id="month"
           class="p-2 ml-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          onchange="selectMonth(this.value)">
+          >
 
           <option value="">Select Month</option>
           <option value="1">January</option>
@@ -64,18 +64,18 @@
        <!-- Month Selector - Desktop -->
     <div class="hidden sm:flex flex-wrap justify-center gap-1 my-8">
       <!-- Month Options -->
-      <div id="janBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">January</div>
-      <div id="febBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">February</div>
-      <div id="marBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">March</div>
-      <div id="aprBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">April</div>
-      <div id="mayBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">May</div>
-      <div id="junBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">June</div>
-      <div id="julBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">July</div>
-      <div id="augBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">August</div>
-      <div id="sepBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">September</div>
-      <div id="octBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">October</div>
-      <div id="novBtn" class="dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">November</div>
-      <div id="decBtn" class="dark:bg-gray-900 dark:text-white p-4 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">December</div>
+      <div id="janBtn" value="1" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">January</div>
+      <div id="febBtn" value="2" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">February</div>
+      <div id="marBtn" value="3" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">March</div>
+      <div id="aprBtn" value="4" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">April</div>
+      <div id="mayBtn" value="5" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">May</div>
+      <div id="junBtn" value="6" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">June</div>
+      <div id="julBtn" value="7" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">July</div>
+      <div id="augBtn" value="8" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">August</div>
+      <div id="sepBtn" value="9" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">September</div>
+      <div id="octBtn" value="10" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">October</div>
+      <div id="novBtn" value="11" class="month-btn dark:bg-gray-900 dark:text-white p-4 dark:hover:bg-gray-500 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">November</div>
+      <div id="decBtn" value="12" class="month-btn dark:bg-gray-900 dark:text-white p-4 bg-white border border-gray-300 rounded-md text-center cursor-pointer transition duration-300 hover:bg-gray-300">December</div>
   </div>
    
 
