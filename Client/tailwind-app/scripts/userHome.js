@@ -118,24 +118,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Iterate through each expense and create HTML elements dynamically
         response.data.expenses.forEach((expense) => {
-          const expenseRow = document.createElement("tr");
-          expenseRow.classList.add(
-            "border-b",
-            "bg-white",
-            "dark:bg-gray-900",
-            "dark:border-gray-700"
-          );
+          //..............................
+          const expenseDate = new Date(expense.startDate);
+          const expenseMonth = expenseDate.getMonth();
 
-          // Add table data for each column
-          expenseRow.innerHTML = `
-                        <td class="whitespace-nowrap px-6 py-4 font-medium">${expense.startDate}</td>
-                        <td class="whitespace-nowrap px-6 py-4 dark:text-white">${expense.payee}</td>
-                        <td class="whitespace-nowrap px-6 py-4 dark:text-white">${expense.category}</td>
-                        <td class="whitespace-nowrap px-6 py-4 dark:text-white">$${expense.amount}</td>
-                    `;
+          // Get the current month
+          const currentDate = new Date();
+          const currentMonth = currentDate.getMonth();
 
-          // Append the row to the table body
-          latestExpensesBody.appendChild(expenseRow);
+          if (expenseMonth == currentMonth) {
+            const expenseRow = document.createElement("tr");
+            expenseRow.classList.add(
+              "border-b",
+              "bg-white",
+              "dark:bg-gray-900",
+              "dark:border-gray-700"
+            );
+
+            // Add table data for each column
+            expenseRow.innerHTML = `
+                          <td class="whitespace-nowrap px-6 py-4 font-medium">${expense.startDate}</td>
+                          <td class="whitespace-nowrap px-6 py-4 dark:text-white">${expense.payee}</td>
+                          <td class="whitespace-nowrap px-6 py-4 dark:text-white">${expense.category}</td>
+                          <td class="whitespace-nowrap px-6 py-4 dark:text-white">$${expense.amount}</td>
+                      `;
+
+            // Append the row to the table body
+            latestExpensesBody.appendChild(expenseRow);
+          }
         });
 
         // Update Donut
