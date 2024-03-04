@@ -1,3 +1,51 @@
+document.addEventListener("DOMContentLoaded", (event) => {
+  // Month buttons
+  document
+    .getElementById("janBtn")
+    .addEventListener("click", () => selectMonth(1));
+  document
+    .getElementById("febBtn")
+    .addEventListener("click", () => selectMonth(2));
+  document
+    .getElementById("marBtn")
+    .addEventListener("click", () => selectMonth(3));
+  document
+    .getElementById("aprBtn")
+    .addEventListener("click", () => selectMonth(4));
+  document
+    .getElementById("mayBtn")
+    .addEventListener("click", () => selectMonth(5));
+  document
+    .getElementById("junBtn")
+    .addEventListener("click", () => selectMonth(6));
+  document
+    .getElementById("julBtn")
+    .addEventListener("click", () => selectMonth(7));
+  document
+    .getElementById("augBtn")
+    .addEventListener("click", () => selectMonth(8));
+  document
+    .getElementById("sepBtn")
+    .addEventListener("click", () => selectMonth(9));
+  document
+    .getElementById("octBtn")
+    .addEventListener("click", () => selectMonth(10));
+  document
+    .getElementById("novBtn")
+    .addEventListener("click", () => selectMonth(11));
+  document
+    .getElementById("decBtn")
+    .addEventListener("click", () => selectMonth(12));
+
+  // document
+  // .getElementById("decBtn")
+  // .addEventListener("click", () => selectMonth(12));
+  // Year selector
+  document.getElementById("year").addEventListener("change", function () {
+    selectingYear(this.value);
+  });
+});
+
 let currentlySelectedMonth = null;
 let currentlySelectedYear = "2024";
 
@@ -40,7 +88,7 @@ function getToken() {
   return tokenObj.value; // Return the token if it hasn't expired
 }
 
-token = getToken();
+const token = getToken();
 
 axios
   .get("https://partialbackendforweb.onrender.com/pages/api/budget", {
