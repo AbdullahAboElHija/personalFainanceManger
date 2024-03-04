@@ -1,3 +1,15 @@
+function getToken() {
+  const tokenObj = JSON.parse(localStorage.getItem("token"));
+  if (!tokenObj) return null;
+  const currentTime = new Date().getTime();
+  if (currentTime > tokenObj.expires) {
+    localStorage.removeItem("token"); // Remove expired token
+    return null;
+  }
+
+  return tokenObj.value; // Return the token if it hasn't expired
+}
+
 const categoryButton = document.getElementById("categoryButton");
 const dropdown = document.getElementById("dropdown");
 const questionMark = document.getElementById("questionMark");
