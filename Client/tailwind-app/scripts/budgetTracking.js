@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  // Month buttons
   document
     .getElementById("janBtn")
     .addEventListener("click", () => selectMonth(1));
@@ -214,6 +213,11 @@ function selectMonth(month) {
     console.log("Please select a year first");
   }
 }
+
+document.getElementById("month").addEventListener("change", (e) => {
+  const monthValue = e.target.value;
+  selectMonth(monthValue);
+});
 
 //----------------------------------------------------------------------
 
